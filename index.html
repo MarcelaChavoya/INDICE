@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+        <style>
+        #map {
+            width: 1024px;
+            height: 795px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="data/CDMXcopy_1.js"></script>
+        <script src="data/indice_compuesto_4_2.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[18.988494786337313,-99.60478768298391],[19.751078520303277,-98.56814440359216]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_GoogleSatelliteHybrid_0');
+        map.getPane('pane_GoogleSatelliteHybrid_0').style.zIndex = 400;
+        var layer_GoogleSatelliteHybrid_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleSatelliteHybrid_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+        });
+        layer_GoogleSatelliteHybrid_0;
+        map.addLayer(layer_GoogleSatelliteHybrid_0);
+        function pop_CDMXcopy_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CVE_ENT'] !== null ? autolinker.link(feature.properties['CVE_ENT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NOM_ENT'] !== null ? autolinker.link(feature.properties['NOM_ENT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CVE_CAP'] !== null ? autolinker.link(feature.properties['CVE_CAP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NOM_CAP'] !== null ? autolinker.link(feature.properties['NOM_CAP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['COV_'] !== null ? autolinker.link(feature.properties['COV_'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['COV_ID'] !== null ? autolinker.link(feature.properties['COV_ID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['AREA'] !== null ? autolinker.link(feature.properties['AREA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PERIMETER'] !== null ? autolinker.link(feature.properties['PERIMETER'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_CDMXcopy_1_0() {
+            return {
+                pane: 'pane_CDMXcopy_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(165,165,165,0.8941176470588236)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_CDMXcopy_1');
+        map.getPane('pane_CDMXcopy_1').style.zIndex = 401;
+        map.getPane('pane_CDMXcopy_1').style['mix-blend-mode'] = 'normal';
+        var layer_CDMXcopy_1 = new L.geoJson(json_CDMXcopy_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_CDMXcopy_1',
+            layerName: 'layer_CDMXcopy_1',
+            pane: 'pane_CDMXcopy_1',
+            onEachFeature: pop_CDMXcopy_1,
+            style: style_CDMXcopy_1_0,
+        });
+        bounds_group.addLayer(layer_CDMXcopy_1);
+        map.addLayer(layer_CDMXcopy_1);
+        function pop_indice_compuesto_4_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>CUADRANTE</strong><br />' + (feature.properties['CUADRANTE'] !== null ? autolinker.link(feature.properties['CUADRANTE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Numero_act</strong><br />' + (feature.properties['Numero_act'] !== null ? autolinker.link(feature.properties['Numero_act'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>indice_num</strong><br />' + (feature.properties['indice_num'] !== null ? autolinker.link(feature.properties['indice_num'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Superficie</strong><br />' + (feature.properties['Superficie'] !== null ? autolinker.link(feature.properties['Superficie'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Indice_Sup</strong><br />' + (feature.properties['Indice_Sup'] !== null ? autolinker.link(feature.properties['Indice_Sup'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Monto</strong><br />' + (feature.properties['Monto'] !== null ? autolinker.link(feature.properties['Monto'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Indice_Mon</strong><br />' + (feature.properties['Indice_Mon'] !== null ? autolinker.link(feature.properties['Indice_Mon'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Unidades_a</strong><br />' + (feature.properties['Unidades_a'] !== null ? autolinker.link(feature.properties['Unidades_a'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>porcentaje</strong><br />' + (feature.properties['porcentaje'] !== null ? autolinker.link(feature.properties['porcentaje'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Area_refor</strong><br />' + (feature.properties['Area_refor'] !== null ? autolinker.link(feature.properties['Area_refor'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Porcenta_1</strong><br />' + (feature.properties['Porcenta_1'] !== null ? autolinker.link(feature.properties['Porcenta_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Indice_fin</strong><br />' + (feature.properties['Indice_fin'] !== null ? autolinker.link(feature.properties['Indice_fin'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Indice</strong><br />' + (feature.properties['Indice'] !== null ? autolinker.link(feature.properties['Indice'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_indice_compuesto_4_2_0(feature) {
+            if (feature.properties['Indice'] >= 0.000000 && feature.properties['Indice'] <= 0.510000 ) {
+                return {
+                pane: 'pane_indice_compuesto_4_2',
+                opacity: 1,
+                color: 'rgba(165,165,165,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(188,220,60,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Indice'] >= 0.510000 && feature.properties['Indice'] <= 2.213600 ) {
+                return {
+                pane: 'pane_indice_compuesto_4_2',
+                opacity: 1,
+                color: 'rgba(165,165,165,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(179,171,60,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Indice'] >= 2.213600 && feature.properties['Indice'] <= 5.061200 ) {
+                return {
+                pane: 'pane_indice_compuesto_4_2',
+                opacity: 1,
+                color: 'rgba(165,165,165,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(169,121,59,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Indice'] >= 5.061200 && feature.properties['Indice'] <= 9.413000 ) {
+                return {
+                pane: 'pane_indice_compuesto_4_2',
+                opacity: 1,
+                color: 'rgba(165,165,165,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(160,72,59,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Indice'] >= 9.413000 && feature.properties['Indice'] <= 43.306000 ) {
+                return {
+                pane: 'pane_indice_compuesto_4_2',
+                opacity: 1,
+                color: 'rgba(165,165,165,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(150,22,58,1.0)',
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane_indice_compuesto_4_2');
+        map.getPane('pane_indice_compuesto_4_2').style.zIndex = 402;
+        map.getPane('pane_indice_compuesto_4_2').style['mix-blend-mode'] = 'normal';
+        var layer_indice_compuesto_4_2 = new L.geoJson(json_indice_compuesto_4_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_indice_compuesto_4_2',
+            layerName: 'layer_indice_compuesto_4_2',
+            pane: 'pane_indice_compuesto_4_2',
+            onEachFeature: pop_indice_compuesto_4_2,
+            style: style_indice_compuesto_4_2_0,
+        });
+        bounds_group.addLayer(layer_indice_compuesto_4_2);
+        map.addLayer(layer_indice_compuesto_4_2);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'indice_compuesto_4<br /><table><tr><td style="text-align: center;"><img src="legend/indice_compuesto_4_2_00510.png" /></td><td>0 - 0.51</td></tr><tr><td style="text-align: center;"><img src="legend/indice_compuesto_4_2_0512211.png" /></td><td>0.51 - 2.21</td></tr><tr><td style="text-align: center;"><img src="legend/indice_compuesto_4_2_2215062.png" /></td><td>2.21 - 5.06</td></tr><tr><td style="text-align: center;"><img src="legend/indice_compuesto_4_2_5069413.png" /></td><td>5.06 - 9.41</td></tr><tr><td style="text-align: center;"><img src="legend/indice_compuesto_4_2_94143314.png" /></td><td>9.41 - 43.31</td></tr></table>': layer_indice_compuesto_4_2,'<img src="legend/CDMXcopy_1.png" /> CDMX copy': layer_CDMXcopy_1,"Google Satellite Hybrid": layer_GoogleSatelliteHybrid_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        </script>
+    </body>
+</html>
